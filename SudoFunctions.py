@@ -165,13 +165,13 @@ def solve_sudoku(sudoku):
                 while not optionused == listpenciltest[nextCell][0]:
                     listpenciltest[nextCell].pop(0)
                 if len(listpenciltest[nextCell]) == 1:
-                    nextCell = pick_last_empty_cell(listsudo17[0:nextCell])
+                    nextCell = pick_last_empty_cell(sudoku[0:nextCell])
                     optionused = listsudotest[nextCell]
                     listpenciltest[nextCell] = listpencil[nextCell]
                 else:
                     listpenciltest[nextCell].pop(0)
                     listpenciltest[nextCell + 1:81] = listpencil[nextCell + 1:81]
-                    listsudotest[nextCell + 1:81] = listsudo17[nextCell + 1:81]
+                    listsudotest[nextCell + 1:81] = sudoku[nextCell + 1:81]
                     moreoptions = True
         else:
             listpenciltest = fill_pencils(listsudotest)
