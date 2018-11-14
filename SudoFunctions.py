@@ -35,16 +35,12 @@ def get_listx(cell,sudoku):
     line = (cell)//9
     linestart = line*9
     lineend=line*9+8
-    column = cell % 9
-    listx = sudoku[linestart:lineend+1]
-    get_listx = listx
-    return get_listx
+    return sudoku[linestart:lineend+1]
 
 def get_listy(cell, sudoku):
     column = cell % 9
-    listy = sudoku[column:column+73:9]
-    get_listy = listy
-    return get_listy
+    return sudoku[column:column+73:9]
+
 
 def get_listbox(cell, sudoku):
     linebox = ((cell)//9) % 3
@@ -53,8 +49,7 @@ def get_listbox(cell, sudoku):
     listbox = sudoku[cellstart:cellstart+3]
     listbox.extend(sudoku[cellstart+9:cellstart+9+3])
     listbox.extend(sudoku[cellstart + 9 + 9:cellstart + 9 + 9 + 3])
-    get_listbox = listbox
-    return get_listbox
+    return listbox
 
 def list_possibilities(cell, sudoku):
     list_x = get_listx(cell, sudoku)
@@ -78,17 +73,14 @@ def put_sudo_txt(sudoku, outfile):
         print(strtxt, file=text_file)
 
 def fill_pencils(sudoku):
-    pencils = []
-    for i in range(0,81):
-        pencils.insert(i,0)
+    pencils = [0 for i in range(0,81)]
 
     for i in range(0,81):
         if sudoku[i]>0:
             pencils[i] = sudoku[i]
         else:
             pencils[i]=list_possibilities(i,sudoku)
-
-    return  pencils
+    return pencils
 
 def fill_stupid(pencils):
     newcell = False
@@ -98,7 +90,6 @@ def fill_stupid(pencils):
             worklist[i]=pencils[i]
         else:
             if len(pencils[i])==1:
-
                 worklist[i] = pencils[i][0]
                 newcell = True
             else:
@@ -132,7 +123,7 @@ def solve_sudoku(sudoku):
 
     solution = False
 
-    for i in range(0, 2000):
+    for i in range(0, 5000):
         nextCell = pick_next_empty_cell(listsudotest)
         i = nextCell
         listsudotest[nextCell] = listpenciltest[nextCell][0]
@@ -197,3 +188,10 @@ def make_sudo (numberofcells):
             list_free = list_possibilities(nextCell,listsudo17)
         listsudo17[nextCell]=random.sample(list_free,1)[0]
     return listsudo17
+
+
+#x= input("digite o sudoku:")
+#x=[int(i) for i in x]
+#if not len(x)<81:
+x=make_sudo(17)
+solve_sudoku(x)
