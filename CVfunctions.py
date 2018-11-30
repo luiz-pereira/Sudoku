@@ -27,7 +27,7 @@ external_only = cv2.drawContours(sudo_img_proc.copy(), ex_contours, -1, (255, 0,
 contours = sorted(contours,key=cv2.contourArea,reverse=True)
 polygon = contours[0]
 
-bottom_right = max()#
+#bottom_right = max()#
 
 cv2.imshow('image', external_only)
 cv2.waitKey(0)
